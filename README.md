@@ -4,7 +4,7 @@ This is the code for PseudoClone.
 
 
 pre-process includes the trainsformation on source code so it can be fit into models for training and testing.
-See `pre-process/process/generate-xxxx` for detail usage.
+See `pre-process/Code2Vec/generate-xxxx` for detail usage.
 
 train includes the train code for BiLSTM+Attention.
 
