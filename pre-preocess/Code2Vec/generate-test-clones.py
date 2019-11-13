@@ -6,9 +6,9 @@ from configparser import ConfigParser
 import time
 from tqdm import *
 from multiprocessing import *
-from data.utils.Normalizer import *
-from data.utils.RelationExtractor import *
-from data.utils.apply_bpe import *
+from Normalizer import *
+from RelationExtractor import *
+from apply_bpe import *
 
 def extract_function_body(function):
     return_string = ''
@@ -246,7 +246,7 @@ def process_pairs(thread_no, config, clones, nonclones,bpe_processor):
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('config/gpu-config.ini')
+    config.read('config/myconfig.ini')
 
     random.seed(666)
     code_file = config.get('IO','TPE_CODE')

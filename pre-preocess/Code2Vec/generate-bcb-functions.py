@@ -5,10 +5,10 @@ from configparser import ConfigParser
 from multiprocessing import Process, Pool
 import hashlib, os, argparse, time
 from tqdm import *
-from data.utils.Preprocessor import *
-from data.utils.Normalizer import *
-from data.utils.RelationExtractor import *
-from data.utils.apply_bpe import *
+from utils.Preprocessor import *
+from utils.Normalizer import *
+from utils.RelationExtractor import *
+from utils.apply_bpe import *
 
 
 def extract_function_body(function):
@@ -62,67 +62,18 @@ def process(config, functions, thread_no, bpe):
                 j += 1
                 if j > int(end_loc):
                     break
-        stmt_node_children = ''
-        stmt_node_parent = ''
-        token_node_parent = ''
-        token_node_children = ''
-        bpe_node_children = ''
-        bpe_node_parent = ''
-        ori_node_parent = ''
-        ori_node_children = ''
-
         f = preprocessor.remove_comments(f)
         f = extract_function_body(f)
         f4ori = f
         f = normalizer.normalize_literal_values(f)
         f = special_cutter.cut(f)
         f = brace_cutter.cut(f)
-        # function, untokenized_dict, function_statement, function_token, stmt_node_list, token_node_list = extractor.extract(
-        #     f)
-        # for node in stmt_node_list:
-        #     stmt_node_children += ','.join([str(c) for c in node.get_children()]) + ' '
-        #     stmt_node_parent += ','.join([str(c) for c in node.get_parent()]) + ' '
-        # for node in token_node_list:
-        #     token_node_parent += ','.join([str(c) for c in node.get_children()]) + ' '
-        #     token_node_children += ','.join([str(c) for c in node.get_parent()]) + ' '
-        #     # ori_node_children += ','.join([str(c) for c in node.get_children()]) + ' '
-        #     # ori_node_parent += ','.join([str(c) for c in node.get_parent()]) + ' '
-        # stmt_tokenized += function_statement + '\nc ' + stmt_node_children.strip() + '\nh ' + stmt_node_parent.strip() + '\n'
-        # token_tokenized += function_token + '\nc ' + token_node_children.strip() + '\nh ' + token_node_parent.strip() + '\n'
-
-        # ori_untokenized += re.sub(r'[ \n;]+', ' ',
-        #                           function) + '\nc ' + ori_node_children.strip() + '\nh ' + ori_node_parent.strip() + '\n'
-        # file_operator = open(tmp_file1, 'w', encoding='UTF-8')
-        # file_operator.write(function_statement)
-        # file_operator.close()
-        # status = os.system('sh ~/apply_bpe-12000.sh ' + tmp_file1 + ' ' + tmp_file2 + ' 1>/dev/null')
-        # file_operator = open(tmp_file2, 'r', encoding='UTF-8')
-        # f = file_operator.read()
-        # file_operator.close()
         _, _, function_bpe, _, bpe_node_list, _ = extractor.extract(f)
         stmt_tokenized += function_bpe + '\nc -1\nh -1\n'
         token_tokenized += re.sub(r'\$\$', ' ', function_bpe) + '\nc -1\nh -1\n'
         function_bpe = bpe.process_line(function_bpe)
-        # f = normalizer.unormalize(f, untokenized_dict, token_node_list)
-        # extractor.reset()
-        # _, _, function_bpe, _, bpe_node_list, _ = extractor.extract(f)
-        # for node in bpe_node_list:
-        #     bpe_node_children += ','.join([str(c) for c in node.get_children()]) + ' '
-        #     bpe_node_parent += ','.join([str(c) for c in node.get_parent()]) + ' '
-        # bpe_tokenized += function_bpe + '\nc ' + bpe_node_children.strip() + '\nh ' + bpe_node_parent.strip() + '\n'
         bpe_tokenized += re.sub(r'@@', ' ', function_bpe) + '\nc -1\nh -1\n'
-
         extractor.reset()
-
-        # ori_function, _, _, _, _, ori_token_node_list = extractor.extract(f4ori)
-        # for node in ori_token_node_list:
-        #     ori_node_parent += ','.join([str(c) for c in node.get_children()]) + ' '
-        #     ori_node_children += ','.join([str(c) for c in node.get_parent()]) + ' '
-        # ori_untokenized += re.sub('[ \n;]+', ' ',
-        #                           ori_function) + '\nc ' + ori_node_children.strip() + '\nh ' + ori_node_parent.strip() + '\n'
-        #
-        # extractor.reset()
-
         ori_untokenized += info_str.strip() + '\n\n'
         token_tokenized += info_str.strip() + '\n\n'
         stmt_tokenized += info_str.strip() + '\n\n'
@@ -161,7 +112,7 @@ def write_files(output_base, ori_untokenized, token_tokenized, stmt_tokenized, b
 if __name__ == '__main__':
     print('Run the main process (%s)' % (os.getpid()))
     config = ConfigParser()
-    config.read('config/gpu-config.ini')
+    config.read('config/myconfig.ini')
     code_file = config.get('IO','TPE_CODE')
 
     print(code_file)

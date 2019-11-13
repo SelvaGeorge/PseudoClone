@@ -110,4 +110,3 @@ venv.bak/
 *.ini
 model/data/
 /LSTMCClone/dataset/
-!/pre-preocess/data/config/myconfig.ini.sample

@@ -1,6 +1,6 @@
 from collections import Counter
-import re, sys, os
-from data.utils.DictReader import DictReader
+import re, os
+from DictReader import DictReader
 
 
 class Normalizer:

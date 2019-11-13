@@ -1,6 +1,5 @@
 from collections import Counter
 import hashlib
-from data.utils import *
 
 
 def get_gold(clone, nonclone, seperator=','):

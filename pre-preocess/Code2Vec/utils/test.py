@@ -1,7 +1,6 @@
-from data.utils.Preprocessor import *
-from data.utils.Normalizer import *
+from Normalizer import *
 from configparser import *
-from data.utils.RelationExtractor import *
+from RelationExtractor import *
 
 
 def extract_function_body(function):
@@ -47,7 +46,7 @@ target = 'public void testNotBlankMsgBlankStringShouldThrow() {\n' \
          '}\n' \
          '}'
 config = ConfigParser()
-config.read('config/gpu-config.ini')
+config.read('config/myconfig.ini')
 pre = PreProcessor()
 extractor = RelationExtractor(config)
 nor = Normalizer(config)

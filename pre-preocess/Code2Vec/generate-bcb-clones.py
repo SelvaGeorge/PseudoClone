@@ -6,7 +6,7 @@ import time
 
 if __name__ == '__main__':
     config = ConfigParser()
-    config.read('config/gpu-config.ini')
+    config.read('config/myconfig.ini')
 
     experiment_base = config.get('IO', 'EXPERIMENT_OUT_BASE')
     bcb_clones_input = config.get('IO', 'BCB_CLONES_INPUT')
@@ -111,20 +111,6 @@ if __name__ == '__main__':
                     key = hashlib.md5(function_info.encode('utf-8')).hexdigest()
                     function2id[key] = i
                     i += 1
-                    # if key in function2id.keys():
-                    #     id = function2id[key]
-                    #     recorded_info = id2function[id]
-                    #     if recorded_info != function_info:
-                    #         print('出现记录不匹配的情况，src %s , tgt %s ' % (recorded_info, function_info))
-                    #         exit(-1)
-                    #     else:
-                    #         id2function[i] = function_info
-                    #         key = hashlib.md5(function_info.encode('utf-8')).hexdigest()
-                    #         function2id[key] = i
-                    #         i += 1
-                    #         id2bpe[id] = '\n'.join(context[0:3])
-                    # else:
-                    #     print('出现没有被记录的函数的情况，函数信息为 %s' % (function_info))
                 else:
                     if len(context) == 0:
                         context.append('')

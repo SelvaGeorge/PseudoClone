@@ -1,8 +1,6 @@
-import re
-
-from data.entity.Node import Node
-from data.utils.DictReader import DictReader
-from data.utils.Preprocessor import *
+from Node import Node
+from DictReader import DictReader
+from Preprocessor import *
 
 
 class RelationExtractor:

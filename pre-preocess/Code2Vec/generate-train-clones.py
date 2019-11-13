@@ -4,9 +4,9 @@ sys.path.extend(["../../", "../", "./"])
 from configparser import ConfigParser
 
 import random, hashlib
-from data.utils.Normalizer import *
-from data.utils.RelationExtractor import *
-from data.utils.apply_bpe import *
+from Normalizer import *
+from RelationExtractor import *
+from apply_bpe import *
 from multiprocessing import *
 import time
 
@@ -225,7 +225,7 @@ def process_pairs(thread_no, pairs, config, bpe_processor):
 
 if __name__ == "__main__":
     config = ConfigParser()
-    config.read('config/gpu-config.ini')
+    config.read('config/myconfig.ini')
     code_file = config.get('IO', 'TPE_CODE')
     print(code_file)
     codes = open(code_file, 'r', encoding='utf-8')
@@ -241,7 +241,6 @@ if __name__ == "__main__":
     all_bpe = []
     bpe = BPE(codes, -1, '@@', None, None)
     gy_nonclone_database = os.path.join(config.get('IO', 'BCB_CODE_BASE'), '46')
-    gy_clone_database = config.get(section='IO', option='GY_DATASET_INPUT')
     output_base = config.get('IO', 'TRAIN_OUTPUT_BASE')
 
     # token_output_file = os.path.join(output_base, 'token.txt')

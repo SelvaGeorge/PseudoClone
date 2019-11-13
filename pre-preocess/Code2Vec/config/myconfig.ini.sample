@@ -1,0 +1,69 @@
+[IO]
+
+;Train corpus input
+BCB_CODE_BASE = /path/to/dataset/bcb_reduced
+SIX_DATASET = /path/to/dataset/bcb_reduced/47
+
+
+TRAIN_OUTPUT_BASE = dataset/corpus-related/train
+TEST_OUTPUT_BASE = dataset/corpus-related/test
+GY_TYPE3_INPUT = dataset/input/gy/gy-clone-pairs.txt
+GY_NONCLONES_INPUT = dataset/input/gy/gy-nonclone-pairs.txt
+AUTOGEN_CLONES_BASE =dataset/input/autogen
+TPE_CODE= dataset/input/tpe-10000.code
+
+BCB_CLONES_INPUT = dataset/input/bcb-clones.txt
+BCB_NONCLONES_INPUT = dataset/input/ori-non-clones.out
+EXPERIMENT_OUT_BASE = dataset/corpus-related/experiment
+
+[MIDDLE]
+IMPORTED_CLASSES = dataset/middle/corpus-related/imported-classes.vocab
+SELF_DEFINED_CLASSES = dataset/middle/corpus-related/self-defined-classes.vocab
+JAVA_KEYWORD_DICT = dataset/middle/corpus-related/keyword.dict
+OPERATION_CUTTER_DICT = dataset/middle/corpus-related/OperationCutter.dict
+
+;clone infos output
+DEV_CLONE_INFO = dataset/middle/clones-related/dev-clone-pair.info
+TRAIN_CLONE_INFO = dataset/middle/clones-related/train-clone-pair.info
+TRAIN2_CLONE_INFO = dataset/middle/clones-related/train-1000-clone-pair.info
+TRAIN3_CLONE_INFO = dataset/middle/clones-related/train-10000-clone-pair.info
+TEST_CLONE_INFO = dataset/middle/clones-related/test-clone-pair.info
+;non-clone infos output
+DEV_NONCLONE_INFO = dataset/middle/clones-related/dev-nonclone-pair.info
+TRAIN_NONCLONE_INFO = dataset/middle/clones-related/train-nonclone-pair.info
+TRAIN2_NONCLONE_INFO = dataset/middle/clones-related/train-1000-nonclone-pair.info
+TRAIN3_NONCLONE_INFO = dataset/middle/clones-related/train-10000-nonclone-pair.info
+TEST_NONCLONE_INFO = dataset/middle/clones-related/test-nonclone-pair.info
+
+;code blocks for type3 clone generation
+BLOCKS_OUTPUT = dataset/middle/corpus-related/blocks.txt
+
+;middle outputs
+LITERAL_STRING_VOCAB_OUTPUT = dataset/middle/string.vocab
+
+CLONES_INFO_OUTPUT = dataset/middle/clones-info.txt
+
+NONCLONES_INFO_OUTPUT = dataset/middle/non-clones-info.txt
+
+CLASS_NAME2TOKEN = dataset/middle/class2token.dict
+
+FUNCTION_NAME2TOKEN = dataset/middle/function2token.dict
+
+ATTRIBUTE_NAME2TOKEN = dataset/middle/attribute2token.dict
+
+IDENTIFIER2TOKEN = dataset/middle/identifier2token.dict
+
+
+
+METHOD_NAMES_OUTPUT = dataset/middle/corpus-related/method_names.vocab
+
+
+
+CLONE_PER_FUNCTIONALITY_COUNTER = dataset/middle/clone-per-functionality.cnt
+TIMES_PER_FUNCTION = dataset/middle/times-per-function.cnt
+
+[TOKENIZE]
+IF_EXTEND_DICT = 0
+
+[LOG]
+LOG_BASE = dataset/log
